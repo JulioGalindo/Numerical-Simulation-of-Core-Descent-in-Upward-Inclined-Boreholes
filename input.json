@@ -1,0 +1,30 @@
+{
+  "NQ": {
+    "longitud_testigo": 3.0,
+    "longitud_pozo": 100.0,
+    "caudal_lpm": 60,
+    "viscosidad_marsh": 30,
+    "angulo_deg": 75,
+    "rango_viscosidad": [30, 42, 2],
+    "rango_angulo": [30, 60, 20],
+    "rango_caudal": [20, 80, 10]
+  },
+  "HQ": {
+    "longitud_testigo": 3.0,
+    "longitud_pozo": 100.0,
+    "caudal_lpm": 30,
+    "viscosidad_marsh": 35,
+    "angulo_deg": 39,
+    "rango_viscosidad": [30, 42, 2],
+    "rango_caudal": [20, 80, 10]
+  },
+  "PQ": {
+    "longitud_testigo": 3.0,
+    "longitud_pozo": 100.0,
+    "caudal_lpm": 30,
+    "viscosidad_marsh": 30,
+    "angulo_deg": 30,
+    "rango_viscosidad": [30, 42, 2],
+    "rango_caudal": [20, 80, 10]
+  }
+}
