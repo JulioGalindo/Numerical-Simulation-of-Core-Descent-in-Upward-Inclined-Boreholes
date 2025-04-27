@@ -77,5 +77,6 @@ Se generan gráficos de velocidad, posición y aceleración en función del tiem
 ## Ejecución
 
 ```bash
-python Simulacion6.py --config archivo_configuracion.json --tipo HQ
+python Simulacion.py --help
+python Simulacion.py input.json
 ```
