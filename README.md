@@ -1,7 +1,7 @@
 
 # Simulación de Descenso de Testigo en Pozos Inclinados
 
-Este proyecto simula el comportamiento dinámico de un **testigo de perforación** descendiendo dentro de un **pozo inclinado** lleno de fluido, considerando todas las fuerzas relevantes.
+Este proyecto simula el comportamiento dinámico de un **testigo de perforación** descendiendo dentro de **las barras** de un **pozo inclinado ascendente (positivo)** lleno de fluido, considerando todas las fuerzas relevantes, para demostrar que es posible perforar pozos ascendentes **sin tubo interior** y con bajas viscosidades, lo que implica un ahorro importante de tiempo y costo.
 
 ## Modelo Físico
 
