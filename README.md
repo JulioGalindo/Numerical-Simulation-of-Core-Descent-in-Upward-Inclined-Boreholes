@@ -8,49 +8,50 @@ Este proyecto simula el comportamiento dinámico de un **testigo de perforación
 Se consideran las siguientes fuerzas:
 
 - **Fuerza Gravitatoria**  
-  ![Fuerza gravitatoria](fuerza_gravitatoria.png)
+  <img src="fuerza_gravitatoria.png" alt="Fuerza gravitatoria" width="350"/>
 
 - **Fuerza de Flotación**  
-  ![Fuerza flotación](fuerza_flotacion.png)
+  <img src="fuerza_flotacion.png" alt="Fuerza flotación" width="350"/>
 
 - **Fuerza Viscosa (esfuerzo cortante en régimen anular)**  
-  ![Esfuerzo cortante](esfuerzo_cortante.png)
-  ![Fuerza viscosa](fuerza_viscosa.png)
+  <img src="esfuerzo_cortante.png" alt="Esfuerzo cortante" width="350"/>
+  
+  <img src="fuerza_viscosa.png" alt="Fuerza viscosa" width="350"/>
 
 - **Fuerza de Arrastre (Drag turbulento)**  
-  ![Fuerza arrastre](fuerza_arrastre.png)
+  <img src="fuerza_arrastre.png" alt="Fuerza arrastre" width="350"/>
 
 La ecuación general de movimiento es:
 
-![Segunda Ley de Newton](segunda_ley.png)
+<img src="segunda_ley.png" alt="Segunda Ley de Newton" width="350"/>
 
 o en forma explícita:
 
-![Aceleración explícita](aceleracion_explicita.png)
+<img src="aceleracion_explicita.png" alt="Aceleración explícita" width="350"/>
 
 ## Procedimiento Numérico
 
 Sistema resuelto mediante método **Runge-Kutta de 4º orden (RK4)**:
 
 - Actualización de velocidad:  
-  ![RK4 velocidad](rk4_v.png)
+  <img src="rk4_v.png" alt="RK4 velocidad" width="350"/>
 
 - Actualización de posición:  
-  ![RK4 posición](rk4_x.png)
+  <img src="rk4_x.png" alt="RK4 posición" width="350"/>
 
 Con los incrementos intermedios:
 
 - Primeros incrementos:  
-  ![RK4 k1](rk4_k1.png)
+  <img src="rk4_k1.png" alt="RK4 k1" width="350"/>
 
 - Segundos incrementos:  
-  ![RK4 k2](rk4_k2.png)
+  <img src="rk4_k2.png" alt="RK4 k2" width="350"/>
 
 - Terceros incrementos:  
-  ![RK4 k3](rk4_k3.png)
+  <img src="rk4_k3.png" alt="RK4 k3" width="350"/>
 
 - Cuartos incrementos:  
-  ![RK4 k4](rk4_k4.png)
+  <img src="rk4_k4.png" alt="RK4 k4" width="350"/>
 
 ## Parámetros Principales
 
