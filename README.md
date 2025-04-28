@@ -277,3 +277,13 @@ The model thus supports:
 
 - The simulation was specifically designed for the analysis of **core retrieval** during **upward-inclined borehole drilling**.
 - The code structure is optimized for **scientific exploration** and **operational analysis** in drilling engineering.
+
+## Important Note on the Matplotlib Backend
+
+This program requires matplotlib to be configured to use the Qt5Agg backend.
+On macOS systems or customized environments, if an error related to the Matplotlib backend appears when running the script,
+it may be necessary to explicitly install PyQt5 or PySide2 by executing:
+
+```bash
+pip install PyQt5
+```

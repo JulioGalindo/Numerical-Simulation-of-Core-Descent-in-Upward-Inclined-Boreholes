@@ -275,3 +275,13 @@ El modelo, por lo tanto, soporta:
 
 - La simulación fue diseñada específicamente para el análisis de **recuperación del testigo** durante la perforación en pozos inclinados hacia arriba.
 - La estructura del código está optimizada para la **exploración científica** y el **análisis operativo** en ingeniería de perforación.
+
+## Nota Importante sobre el Backend de Matplotlib
+
+Este programa requiere que `matplotlib` esté configurado para usar el backend `Qt5Agg`.
+En sistemas macOS o configuraciones personalizadas, si al ejecutar el script aparece un error relacionado con el backend de Matplotlib,
+puede ser necesario instalar explícitamente `PyQt5` o `PySide2` mediante:
+
+```bash
+pip install PyQt5
+```
