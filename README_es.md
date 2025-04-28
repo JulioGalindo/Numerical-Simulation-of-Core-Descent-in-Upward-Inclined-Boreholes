@@ -164,22 +164,24 @@ pip install -r requirements.txt
 ## Ejemplo de uso
 
 ```
-input.json:
+input.json: // Comentarios no son validos en archivo json
 {
   "NQ": {
-    "longitud_testigo_m": 3.0,
-    "longitud_pozo_m": 100.0,
-    "caudal_lpm": 60,
-    "viscosidad_marsh_seg": 30,
-    "angulo_deg": 75,
-    "rango_viscosidad": [30, 42, 2],
-    "rango_angulo": [30, 60, 20],
-    "rango_caudal": [20, 80, 10],
-    "densidad_roca_kgm3": 2200,
-    "densidad_fluido_kgm3": 1030,
-    "caudal_max_bombeo_lpm": 140,
-    "tiempo_max_simulacion_seg": 1000
+    "longitud_testigo_m": 3.0,         // longitud del testigo para la simulación
+    "longitud_pozo_m": 100.0,          // longitud del pozo para la simulación
+    "caudal_lpm": 60,                  // caudal del fluido para la simulación
+    "viscosidad_marsh_seg": 30,        // Viscosidad para la simulación
+    "angulo_deg": 75,                  // Ángulo del pozo
+    "rango_viscosidad": [30, 42, 2],   // Opcional, [inicio, fin, incremento]
+    "rango_angulo": [30, 60, 20],      // Opcional, [inicio, fin, incremento]
+    "rango_caudal": [20, 80, 10],      // Opcional, [inicio, fin, incremento]
+    "densidad_roca_kgm3": 2200,        // Opcional, default 2200 kg/m3
+    "densidad_fluido_kgm3": 1030,      // Opcional, default 1030 kg/m3
+    "caudal_max_bombeo_lpm": 140,      // Opcional, default 140 lpm, dado por la bomba de fluido
+    "tiempo_max_simulacion_seg": 1000  // Opcional, default 1000 seg
   }
+  // puede añadir cualquier número de simulaciones
+  ...
 }
 ```
 

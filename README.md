@@ -167,22 +167,24 @@ pip install -r requirements.txt
 ## Example Use
 
 ```
-input.json:
+input.json: // Comments are not valid in json file
 {
   "NQ": {
-    "longitud_testigo_m": 3.0,
-    "longitud_pozo_m": 100.0,
-    "caudal_lpm": 60,
-    "viscosidad_marsh_seg": 30,
-    "angulo_deg": 75,
-    "rango_viscosidad": [30, 42, 2],
-    "rango_angulo": [30, 60, 20],
-    "rango_caudal": [20, 80, 10],
-    "densidad_roca_kgm3": 2200,
-    "densidad_fluido_kgm3": 1030,
-    "caudal_max_bombeo_lpm": 140,
-    "tiempo_max_simulacion_seg": 1000
+    "longitud_testigo_m": 3.0,         // core sample length for simulation
+    "longitud_pozo_m": 100.0,          // length of positive borehole for simulation
+    "caudal_lpm": 60,                  // flow in lpm for simulation
+    "viscosidad_marsh_seg": 30,        // Marsh viscosity for simulation
+    "angulo_deg": 75,                  // Bore angle
+    "rango_viscosidad": [30, 42, 2],   // Optional, multiple viscosities [start, end, increment]
+    "rango_angulo": [30, 60, 20],      // Optional, multiple angles [start, end, increment]
+    "rango_caudal": [20, 80, 10],      // Optional, multiple flow rates [start, end, increment]
+    "densidad_roca_kgm3": 2200,        // Optional, core density default 2200 Kg/m3
+    "densidad_fluido_kgm3": 1030,      // Optional, fluid density default 1030 Kg/m3
+    "caudal_max_bombeo_lpm": 140,      // Optional, default 140 lpm, according with fluid pump
+    "tiempo_max_simulacion_seg": 1000  // Optional, default 1000 seg
   }
+  // you can add any number of diferent simulations
+  ...
 }
 ```
 ### Core position, velocity, acceleration vs time
