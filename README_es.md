@@ -106,11 +106,11 @@ La integración se basa en el método **Runge–Kutta de cuarto orden**:
 
 La velocidad se actualiza como:
 
-$dv = \dfrac{dt}{6} \left( k_1v + 2k_2v + 2k_3v + k_4v \right)$
+$dv = \dfrac{\Delta t}{6} \left( k_1v + 2k_2v + 2k_3v + k_4v \right)$
 
 Y la posición se actualiza como:
 
-$dx = \dfrac{dt}{6} \left( k_1x + 2k_2x + 2k_3x + k_4x \right)$
+$dx = \dfrac{\Delta t}{6} \left( k_1x + 2k_2x + 2k_3x + k_4x \right)$
 
 Donde:
 

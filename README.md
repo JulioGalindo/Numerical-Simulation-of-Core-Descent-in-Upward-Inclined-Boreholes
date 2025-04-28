@@ -1,85 +1,3 @@
-# Simulación de Descenso de Testigo en Pozos Ascendentes Inclinados
-
-Este proyecto simula el comportamiento dinámico de un **testigo de perforación** descendiendo dentro de **las barras** de un **pozo inclinado ascendente (positivo)** lleno de fluido, considerando todas las fuerzas relevantes, para demostrar que es posible perforar pozos ascendentes **sin tubo interior** y con bajas viscosidades, lo que implica un ahorro importante de tiempo y costo.
-
-## Modelo Físico
-
-Se consideran las siguientes fuerzas:
-
-- **Fuerza Gravitatoria**  
-  <img src="fuerza_gravitatoria.png" alt="Fuerza gravitatoria" width="450"/>
-
-- **Fuerza de Flotación**  
-  <img src="fuerza_flotacion.png" alt="Fuerza flotación" width="450"/>
-
-- **Fuerza Viscosa (esfuerzo cortante en régimen anular)**  
-  <img src="esfuerzo_cortante.png" alt="Esfuerzo cortante" width="450"/>
-  
-  <img src="fuerza_viscosa.png" alt="Fuerza viscosa" width="450"/>
-
-- **Fuerza de Arrastre (Drag turbulento)**  
-  <img src="fuerza_arrastre.png" alt="Fuerza arrastre" width="450"/>
-
-La ecuación general de movimiento es:
-
-<img src="segunda_ley.png" alt="Segunda Ley de Newton" width="450"/>
-
-o en forma explícita:
-
-<img src="aceleracion_explicita.png" alt="Aceleración explícita" width="450"/>
-
-## Procedimiento Numérico
-
-Sistema resuelto mediante método **Runge-Kutta de 4º orden (RK4)**:
-
-- Actualización de velocidad:  
-  <img src="rk4_v.png" alt="RK4 velocidad" width="450"/>
-
-- Actualización de posición:  
-  <img src="rk4_x.png" alt="RK4 posición" width="450"/>
-
-Con los incrementos intermedios:
-
-- Primeros incrementos:  
-  <img src="rk4_k1.png" alt="RK4 k1" width="450"/>
-
-- Segundos incrementos:  
-  <img src="rk4_k2.png" alt="RK4 k2" width="450"/>
-
-- Terceros incrementos:  
-  <img src="rk4_k3.png" alt="RK4 k3" width="450"/>
-
-- Cuartos incrementos:  
-  <img src="rk4_k4.png" alt="RK4 k4" width="450"/>
-
-## Parámetros Principales
-
-- `tipo`: NQ, HQ o PQ (define diámetros).
-- `longitud_testigo`: Longitud del testigo (m).
-- `longitud_pozo`: Longitud del pozo (m).
-- `caudal_lpm`: Caudal (lpm).
-- `viscosidad_marsh`: Viscosidad medida (s Marsh).
-- `angulo_deg`: Ángulo del pozo (°).
-
-## Resultados
-
-Se generan gráficos de velocidad, posición y aceleración en función del tiempo.
-
-## Requisitos
-
-- Python 3.7+
-- numpy
-- matplotlib
-- argparse
-- json
-
-## Ejecución
-
-```bash
-python Simulacion.py --help
-python Simulacion.py input.json
-```
--------
 # Numerical Simulation of Core Descent in Upward-Inclined Boreholes
 
 This project develops a full numerical model of the dynamic behavior of a core sample descending inside an upward-inclined borehole.  
@@ -176,20 +94,30 @@ Where:
 
 ---
 
-## Numerical Integration: Explicit Runge-Kutta Scheme
+### Traducción al inglés con formato **LaTeX** usando `$`:
 
-The integration is based on a **second-order Runge–Kutta** method:
+The integration is based on the **fourth-order Runge-Kutta method**:
 
-  $V_{n+1} = V_n + \Delta t \left( \frac{dV}{dt} \right)_n$
+$V_{n+1} = V_n + \Delta t \left( \frac{dV}{dt} \right)_n$
 
-  $X_{n+1} = X_n + \Delta t V_{n+1}$
+$X_{n+1} = X_n + \Delta t V_{n+1}$
+
+#### Update of velocity and position:
+
+The velocity is updated as:
+
+$dv = \dfrac{\Delta t}{6} \left( k_1v + 2k_2v + 2k_3v + k_4v \right)$
+
+And the position is updated as:
+
+$dx = \dfrac{\Delta t}{6} \left( k_1x + 2k_2x + 2k_3x + k_4x \right)$
 
 Where:
 
 - $\Delta t$ = time step (adapted for numerical stability)
-- $X$ = core position along borehole
+- $k_1$, $k_2$, $k_3$, and $k_4$ represent the approximations of acceleration and position at different intermediate steps.
 
-Velocity stabilization is detected when acceleration becomes smaller than a defined threshold.
+Velocity stabilization is detected when the acceleration becomes smaller than a defined threshold.
 
 ---
 
