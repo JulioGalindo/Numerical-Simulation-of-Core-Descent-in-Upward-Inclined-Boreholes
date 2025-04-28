@@ -1,3 +1,37 @@
+# Copyright (C) 2025 Julio A. Galindo Q.
+# This file is part of Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes.
+#
+# Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Copyright (C) 2025 Julio A. Galindo Q.
+# Este archivo es parte de Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes.
+#
+# Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes es software libre: puedes redistribuirlo y/o modificarlo
+# bajo los términos de la Licencia Pública General GNU según lo publicado por
+# la Free Software Foundation, ya sea la versión 3 de la licencia o
+# (a tu elección) cualquier versión posterior.
+#
+# Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes se distribuye con la esperanza de que sea útil,
+# pero SIN NINGUNA GARANTÍA; sin ni siquiera la garantía implícita de
+# COMERCIABILIDAD o ADECUACIÓN A UN PROPÓSITO PARTICULAR. Consulta la
+# Licencia Pública General GNU para más detalles.
+#
+# Deberías haber recibido una copia de la Licencia Pública General GNU
+# junto con Numerical-Simulation-of-Core-Descent-in-Upward-Inclined-Boreholes.  Si no, consulta <http://www.gnu.org/licenses/>.
+
+
 import numpy as np
 import matplotlib
 matplotlib.use('Qt5Agg')
