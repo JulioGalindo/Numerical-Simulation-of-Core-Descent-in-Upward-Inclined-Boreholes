@@ -105,9 +105,6 @@ Where:
   $V_{fluid}$ = fluid velocity through the annular area $[m/s]$
 
 ---
-Aquí tienes la traducción al inglés:
-
----
 
 ## Numerical Integration: Explicit Runge-Kutta Scheme
 
