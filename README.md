@@ -190,7 +190,7 @@ python Simulacion.py input.json
 - Q = 60 L/min
 - 30 seconds (Marsh)
 
-The core descends in 84 seconds, at an equilibrium velocity of -1.2 m/s, exerting a force of -1.6 kg.
+The core descends in 84 seconds, at an equilibrium velocity of -1.2 m/s, exerting a force of -1.6 kg upon reaching the bottom.
 
 
 ### Critical Marsh viscosity curves

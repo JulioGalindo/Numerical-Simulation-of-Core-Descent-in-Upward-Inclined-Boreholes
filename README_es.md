@@ -188,7 +188,7 @@ python Simulacion.py input.json
 - Q = 60 L/min
 - 30 segundos (Marsh)
 
-El testigo desciende en 84 segundos, a una velocidad de equilibrio de -1.2 m/s, ejerciendo una fuerza de -1.6 kg.
+El testigo desciende en 84 segundos, a una velocidad de equilibrio de -1.2 m/s, ejerciendo una fuerza de -1.6 kg al llegar a la base.
 
 
 ### Curvas críticas de viscosidad Marsh
