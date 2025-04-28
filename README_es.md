@@ -29,16 +29,26 @@ Además, calcula los límites operacionales críticos basados en los parámetros
 
 | Fuerza | Dirección | Signo |
 |:------|:----------|:----|
-| Fuerza gravitacional $F_g$ | Hacia abajo | Negativo |
-| Fuerza de flotabilidad $F_b$ | Hacia arriba | Positivo |
-| Fuerza viscosa $F_v$ | Opuesta a la velocidad relativa | Depende de $v_{rel}$ |
-| Fuerza de arrastre $F_d$ | Opuesta a la velocidad relativa | Depende de $v_{rel}$ |
-| Movimiento hacia abajo del testigo | Velocidad negativa | |
-| Movimiento hacia arriba del testigo | Velocidad positiva | |
+| Fuerza gravitacional $F_g$ | Hacia abajo a lo largo del pozo | Negativo |
+| Fuerza de flotabilidad $F_b$ | Hacia arriba (flotabilidad) | Positivo |
+| Fuerza viscosa $F_v$ | Opuesta al movimiento relativo | Depende de $v_{rel}$ |
+| Fuerza de arrastre $F_d$ | Opuesta al movimiento relativo | Depende de $v_{rel}$ |
+| Movimiento hacia abajo del testigo | Hacia abajo a lo largo del pozo | Velocidad negativa |
+| Movimiento hacia arriba del testigo | Hacia arriba a lo largo del pozo | Velocidad positiva |
 
 ---
 
-## Ecuaciones gobernantes
+## Definición de la inclinación del pozo
+
+- $\theta > 0^\circ$: El pozo es **ascendente** (inclinación hacia arriba).
+- $\theta = 0^\circ$: El pozo es **horizontal**.
+- $\theta < 0^\circ$: El pozo es **descendente** (caída natural por gravedad).
+
+El eje positivo sigue el pozo hacia arriba.
+
+---
+
+## Ecuaciones de gobierno
 
 El movimiento del testigo está gobernado por la segunda ley de Newton a lo largo del eje del pozo:
 
@@ -223,29 +233,6 @@ Así:
   $\mu \approx \dfrac{1.1 \times (35 - 25)}{1000} = 0.011 \, \ \ Pa \cdot s$
 
 **Nota:** Esta conversión es una aproximación ingenieril y asume un comportamiento newtoniano para lecturas bajas de Marsh, lo que puede no ser estrictamente válido para fluidos de perforación no newtonianos.
-
----
-
-## Convención detallada de signos
-
-| Fuerza | Dirección | Signo |
-|:------|:----------|:----|
-| $F_g$ | Hacia abajo a lo largo del pozo | Negativo |
-| $F_b$ | Hacia arriba (flotabilidad) | Positivo |
-| $F_d$ | Opuesta al movimiento relativo | Depende de $v_{rel}$ |
-| $F_v$ | Opuesta al movimiento relativo | Depende de $v_{rel}$ |
-| Movimiento hacia abajo del testigo | Hacia abajo a lo largo del pozo | Velocidad negativa |
-| Movimiento hacia arriba del testigo | Hacia arriba a lo largo del pozo | Velocidad positiva |
-
----
-
-## Definición de la inclinación del pozo
-
-- $\theta > 0^\circ$: El pozo es **ascendente** (inclinación hacia arriba).
-- $\theta = 0^\circ$: El pozo es **horizontal**.
-- $\theta < 0^\circ$: El pozo es **descendente** (caída natural por gravedad).
-
-El eje positivo sigue el pozo hacia arriba.
 
 ---
 

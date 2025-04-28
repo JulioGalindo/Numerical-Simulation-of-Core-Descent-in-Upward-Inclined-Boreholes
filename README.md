@@ -29,12 +29,22 @@ Additionally, it computes critical operational limits based on the drilling para
 
 | Force | Direction | Sign |
 |:------|:----------|:----|
-| Gravitational force $F_g$ | Downward | Negative |
-| Buoyant force $F_b$ | Upward | Positive |
-| Viscous force $F_v$ | Opposite to relative velocity | Depends on $v_{rel}$ |
-| Drag force $F_d$ | Opposite to relative velocity | Depends on $v_{rel}$ |
-| Core downward motion | Negative velocity | |
-| Core upward motion | Positive velocity | |
+| Gravitational force $F_g$ | Downward along borehole | Negative |
+| Buoyant force $F_b$ | Upward (buoyancy) | Positive |
+| Viscous force $F_v$ | Opposite to relative motion | Depends on $v_{rel}$ |
+| Drag force $F_d$ | Opposite to relative motion | Depends on $v_{rel}$ |
+| Core descending motion | Downward along borehole | Negative velocity |
+| Core ascending motion | Upward along borehole | Positive velocity |
+
+---
+
+## Borehole Inclination Definition
+
+- $\theta > 0^\circ$: Borehole is **ascending** (upward inclined).
+- $\theta = 0^\circ$: Borehole is **horizontal**.
+- $\theta < 0^\circ$: Borehole is **descending** (natural fall by gravity).
+
+The positive axis follows the borehole upwards.
 
 ---
 
@@ -225,29 +235,6 @@ Thus:
   $\mu \approx \dfrac{1.1 \times (35 - 25)}{1000} = 0.011 \, \ \ Pa \cdot s$
 
 **Note:** This conversion is an engineering approximation and assumes Newtonian behavior for low-range Marsh readings, which may not be strictly valid for non-Newtonian drilling fluids.
-
----
-
-## Detailed Sign Convention
-
-| Force | Direction | Sign |
-|:------|:----------|:----|
-| $F_g$ | Downward along borehole | Negative |
-| $F_b$ | Upward (buoyancy) | Positive |
-| $F_d$ | Opposes relative motion | Depends on $v_{rel}$ |
-| $F_v$ | Opposes relative motion | Depends on $v_{rel}$ |
-| Core descending motion | Downward along borehole | Negative velocity |
-| Core ascending motion | Upward along borehole | Positive velocity |
-
----
-
-## Borehole Inclination Definition
-
-- $\theta > 0^\circ$: Borehole is **ascending** (upward inclined).
-- $\theta = 0^\circ$: Borehole is **horizontal**.
-- $\theta < 0^\circ$: Borehole is **descending** (natural fall by gravity).
-
-The positive axis follows the borehole upwards.
 
 ---
 
