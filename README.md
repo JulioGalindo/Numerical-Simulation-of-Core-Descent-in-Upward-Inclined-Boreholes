@@ -183,7 +183,7 @@ input.json: // Comments are not valid in json file
     "caudal_max_bombeo_lpm": 140,      // Optional, default 140 lpm, according with fluid pump
     "tiempo_max_simulacion_seg": 1000  // Optional, default 1000 seg
   }
-  // you can add any number of diferent simulations
+  // you can add any number of different simulations
   ...
 }
 ```
