@@ -183,6 +183,15 @@ python Simulacion.py input.json
 
 <img src="images/Figure_1.png" alt="Simulación" width="800"/>
 
+**Simulation Result:**
+- 100-meter well
+- 75 degrees
+- 3-meter core
+- Q = 60 L/min
+- 30 seconds (Marsh)
+
+The core descends in 84 seconds, at an equilibrium velocity of -1.2 m/s, exerting a force of -1.6 kg.
+
 
 ### Critical Marsh viscosity curves
 

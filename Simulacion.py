@@ -6,33 +6,35 @@ from matplotlib.offsetbox import AnchoredText
 import textwrap
 import argparse
 import json
+import tkinter as tk
 
 class SimuladorTestigo:
-    def __init__(self, config, tipo):
-        self.tipos = {
+    def __init__(self, config, diametro):
+        self.diametros = {
             "NQ": {"d_t": 0.045, "d_b": 0.0476},
             "HQ": {"d_t": 0.0611, "d_b": 0.0635},
             "PQ": {"d_t": 0.083, "d_b": 0.085}
         }
-        self.tipo = tipo
-        self.d_t = self.tipos[tipo]["d_t"]
-        self.d_b = self.tipos[tipo]["d_b"]
-        self.L_testigo = config["longitud_testigo"]
-        self.L_pozo = config["longitud_pozo"]
+        self.diametro = diametro
+        self.d_t = self.diametros[diametro]["d_t"]
+        self.d_b = self.diametros[diametro]["d_b"]
+        self.L_testigo = config["longitud_testigo_m"]
+        self.L_pozo = config["longitud_pozo_m"]
         self.Q = config["caudal_lpm"] / 60000
-        self.mu = 1.1 * (config["viscosidad_marsh"] - 25) / 1000
+        self.mu = 1.1 * (config["viscosidad_marsh_seg"] - 25) / 1000
         self.angulo_deg = config["angulo_deg"]
         self.theta_rad = float(np.radians(self.angulo_deg))
         self.rango_viscosidad = config["rango_viscosidad"]
         self.rango_angulo = config.get("rango_angulo", None)
         self.rango_caudal = config.get("rango_caudal", None)
 
-        self.rho_c = 2200
-        self.rho_f = 1000
-        self.Cd = 0.8
-        self.g = 9.81
-        self.Q_min = 25
-        self.max_caudal_bombeo = self.Q_max = 140
+        self.rho_c = config.get("densidad_roca_kgm3", 2200)                            # Densidad de la roca kg/m3
+        self.rho_f = config.get("densidad_fluido_kgm3", 1030)                          # Densidad del fluido kg/m3
+        self.Cd = 0.8                                                                  # Coeficiente de arrastre frontal del testigo
+        self.g = 9.81                                                                  # Gravedad m/s2
+        self.Q_min = 25                                                                # Caudal mínimo litros/minuto
+        self.max_caudal_bombeo = self.Q_max = config.get("caudal_max_bombeo_lpm", 140) # Caudal máximo de bombeo litros/minuto
+        self.max_tiempo_simulacion = config.get("tiempo_max_simulacion_seg", 1000)     # Máximo tiempo de simulación en seg
 
         self.r1 = self.d_t / 2
         self.r2 = self.d_b / 2
@@ -42,7 +44,6 @@ class SimuladorTestigo:
         self.V = self.Af * self.L_testigo
         self.m = self.rho_c * self.V
 
-        # Tamaño de figura calculado al inicializar
         self.figsize = self._calcular_tamano_figura()
 
     def v_fluido(self):
@@ -64,7 +65,7 @@ class SimuladorTestigo:
         v = 0.0
         T, X, V, A = [], [], [], []
 
-        while x > 0.0 and t < 1000:
+        while x > 0.0 and t < self.max_tiempo_simulacion:
             a = self.aceleracion(v)
             T.append(t)
             X.append(x)
@@ -102,7 +103,6 @@ class SimuladorTestigo:
         return T, X, V, A
 
     def _calcular_tamano_figura(self):
-        import tkinter as tk
         root = tk.Tk()
         root.withdraw()
         width = root.winfo_screenwidth()
@@ -114,8 +114,8 @@ class SimuladorTestigo:
         max_height_inch = height / dpi
 
         # Ajustes de márgenes más realistas
-        ancho = min(16, max_width_inch * 1.00)  # 95% de ancho real disponible
-        alto = min(10, max_height_inch * 0.89)   # Mantener 90% en vertical
+        ancho = min(16, max_width_inch * 1.00)   # 95% de ancho real disponible
+        alto = min(10, max_height_inch * 0.89)   # 89% en vertical
 
         return (ancho, alto)
     
@@ -183,7 +183,7 @@ class SimuladorTestigo:
         self.configurar_minor_ticks(axs[2], eje='both')
 
         # Título principal y sub-título
-        titulo_principal = f"Simulación de caída – {self.tipo}"
+        titulo_principal = f"Simulación de caída – {self.diametro}"
         self.subtitulo_datos = (
             f"Longitud del pozo {self.L_pozo} m, "
             f"Ángulo {self.angulo_deg}\u00B0, "
@@ -370,7 +370,7 @@ class SimuladorTestigo:
         ax.set_ylim(0, max_theta)
         ax.set_xlabel("Caudal (L/min)", fontsize=10)
         ax.set_ylabel("Ángulo crítico (°)", fontsize=10)
-        ax.set_title(f"Ángulo crítico vs Caudal – {self.tipo}", fontsize=11)
+        ax.set_title(f"Ángulo crítico vs Caudal – {self.diametro}", fontsize=11)
         for label in ax.get_xticklabels() + ax.get_yticklabels():
             label.set_fontfamily('monospace')
 
@@ -443,7 +443,7 @@ class SimuladorTestigo:
         ax.set_xlim(self.Q_min, self.max_caudal_bombeo)
         ax.set_xlabel("Caudal (L/min)", fontsize=10)
         ax.set_ylabel("Viscosidad crítica (s Marsh)", fontsize=10)
-        ax.set_title(f"Viscosidad crítica vs Caudal – {self.tipo}", fontsize=11)
+        ax.set_title(f"Viscosidad crítica vs Caudal – {self.diametro}", fontsize=11)
         ax.xaxis.set_major_locator(plt.MultipleLocator(10))
         ax.yaxis.set_major_locator(plt.MultipleLocator(10))
         ax.tick_params(axis='both', labelsize=8)
@@ -527,7 +527,7 @@ class SimuladorTestigo:
         ax.set_ylim(0, mu_max_plot)
         ax.set_xlabel("Ángulo (°)", fontsize=10)
         ax.set_ylabel("Viscosidad crítica (s Marsh)", fontsize=10)
-        ax.set_title(f"Viscosidad crítica vs Ángulo – {self.tipo}", fontsize=11)
+        ax.set_title(f"Viscosidad crítica vs Ángulo – {self.diametro}", fontsize=11)
         ax.xaxis.set_major_locator(plt.MultipleLocator(10))
         ax.yaxis.set_major_locator(plt.MultipleLocator(10))
         ax.tick_params(axis='both', labelsize=8)
@@ -554,7 +554,7 @@ class SimuladorTestigo:
 
 def main():
     parser = argparse.ArgumentParser(description="Simulador de testigo en perforación inclinada con todos los modos de análisis.")
-    parser.add_argument("archivo_json", help="Archivo JSON con configuraciones por tipo.")
+    parser.add_argument("archivo_json", help="Archivo JSON con configuraciones por diámetro.")
     parser.add_argument("--graficar", action="store_true", help="Simulación dinámica con Runge-Kutta.")
     parser.add_argument("--graficar_viscosidad", action="store_true", help="Curvas de ángulo crítico vs caudal para varias viscosidades.")
     parser.add_argument("--graficar_angulo", action="store_true", help="Curvas de viscosidad vs caudal para varios ángulos.")
@@ -566,8 +566,8 @@ def main():
 
     modo_default = not (args.graficar or args.graficar_viscosidad or args.graficar_angulo or args.graficar_caudal)
 
-    for tipo in config:
-        sim = SimuladorTestigo(config[tipo], tipo)
+    for diam in config:
+        sim = SimuladorTestigo(config[diam], diam)
 
         if modo_default:
             # --- Gráfica integrada de 6 cuadros ---
@@ -612,7 +612,7 @@ def main():
             fig.add_artist(at)
 
             # 5. Título general
-            fig.suptitle(f"Simulación Numérica Explícita – {tipo}", fontsize=16)
+            fig.suptitle(f"Simulación Numérica Explícita – {diam}", fontsize=16)
 
             # 6. Compactar
             plt.tight_layout(rect=[0.02, 0, 0.97, 0.96])

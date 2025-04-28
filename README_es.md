@@ -1,4 +1,4 @@
-# Simulación numérica del descenso del testigo en pozos inclinados hacia arriba
+# Simulación numérica del descenso del testigo en pozos inclinados perforados hacia arriba
 
 Este proyecto desarrolla un modelo numérico completo del comportamiento dinámico de una muestra de testigo descendiendo dentro de un pozo inclinado hacia arriba.  
 Considera rigurosamente los efectos combinados de la gravedad, la flotabilidad, la resistencia del fluido de perforación, el esfuerzo viscoso, y simula el movimiento del testigo utilizando un **esquema de integración explícita Runge–Kutta**.  
@@ -51,7 +51,7 @@ donde:
 - $F_g$ = fuerza gravitacional
 - $F_b$ = fuerza de flotabilidad
 - $F_d$ = fuerza de arrastre debido al movimiento relativo contra el fluido
-- $F_v$ = fuerza de cizallamiento viscoso en la pared
+- $F_v$ = fuerza de cizallamiento viscoso entre la tubería y el testigo
 
 ---
 
@@ -64,9 +64,11 @@ donde:
 - **Fuerza de flotabilidad**:
 
   $F_b = \rho_f \ V \ g \ \sin(\theta)$
+
 - **Fuerza de arrastre**:
 
   $F_d = -\frac{1}{2} \ C_d \ \rho_f \ A_f \ v_{rel} \ |v_{rel}|$
+
 - **Fuerza viscosa**:
 
   $F_v = -\tau \ A_{\text{lateral}}$
@@ -81,12 +83,12 @@ Donde:
 
 ---
 
-## Esfuerzo de cizallamiento en la pared (modelo de Bingham)
+## Esfuerzo cortante entre la tubería y el testigo (modelo de Bingham)
 
-El esfuerzo de cizallamiento debido al fluido en la pared del testigo es:
+El paso del fluido entre la tubería y el testigo genera una fuerza cortante que se determina a partir de las ecuaciones de Navier-Stokes, bajo condiciones estáticas, incomprensibles y axiales. El esfuerzo de cizallamiento (corte) generado por el fluido en la pared del testigo es:
 
   $\tau = \dfrac{4 \ \mu \ V_{fluid}}{r_1 \ (1 - (r_1/r_2)^2)}$
-  
+
 Donde:
 
 - $\mu$ = viscosidad dinámica aparente $[Pa \cdot s]$
@@ -98,7 +100,7 @@ Donde:
 
 La integración se basa en el método **Runge–Kutta de cuarto orden**:
 
-  $V_{n+1} = V_n + \Delta t \left( \frac{dV}{dt} \right)_n$
+  $V_{n+1} = V_n + \Delta t \left( \frac{\Delta V}{\Delta t} \right)_n$
 
   $X_{n+1} = X_n + \Delta t V_{n+1}$
 
@@ -106,15 +108,17 @@ La integración se basa en el método **Runge–Kutta de cuarto orden**:
 
 La velocidad se actualiza como:
 
-$dv = \dfrac{\Delta t}{6} \left( k_1v + 2k_2v + 2k_3v + k_4v \right)$
+$\Delta v = \dfrac{\Delta t}{6} \left( k_1v + 2k_2v + 2k_3v + k_4v \right)$
 
 Y la posición se actualiza como:
 
-$dx = \dfrac{\Delta t}{6} \left( k_1x + 2k_2x + 2k_3x + k_4x \right)$
+$\Delta x = \dfrac{\Delta t}{6} \left( k_1x + 2k_2x + 2k_3x + k_4x \right)$
 
 Donde:
 
-- $\Delta t$ = paso de tiempo (adaptado para estabilidad numérica)
+- $\Delta t$ es el paso de tiempo (adaptado para estabilidad numérica)
+- $\Delta v$ es la variación de velocidad en el $\Delta t$
+- $\Delta x$ es el desplazamiento en el $\Delta t$
 - $k_1$, $k_2$, $k_3$, y $k_4$ representan las aproximaciones de la aceleración y la posición a diferentes pasos intermedios.
 
 La estabilización de la velocidad se detecta cuando la aceleración se vuelve más pequeña que un umbral definido.
@@ -147,11 +151,55 @@ pip install -r requirements.txt
 
 ---
 
-## Ejemplos de gráficos
+## Ejemplo de uso
 
-- Posición del testigo, velocidad, aceleración vs tiempo
-- Curvas críticas de viscosidad Marsh
-- Mapas operacionales de estabilidad
+```
+input.json:
+{
+  "NQ": {
+    "longitud_testigo_m": 3.0,
+    "longitud_pozo_m": 100.0,
+    "caudal_lpm": 60,
+    "viscosidad_marsh_seg": 30,
+    "angulo_deg": 75,
+    "rango_viscosidad": [30, 42, 2],
+    "rango_angulo": [30, 60, 20],
+    "rango_caudal": [20, 80, 10],
+    "densidad_roca_kgm3": 2200,
+    "densidad_fluido_kgm3": 1030,
+    "caudal_max_bombeo_lpm": 140,
+    "tiempo_max_simulacion_seg": 1000
+  }
+}
+```
+
+### Posición del testigo, velocidad, aceleración vs tiempo
+
+```
+python Simulacion.py input.json
+```
+
+<img src="images/Figure_1.png" alt="Simulación" width="800"/>
+
+**Resultado de la simulación:**
+- Pozo de 100 metros
+- 75 grados
+- Testigo de 3 metros
+- Q = 60 L/min
+- 30 segundos (Marsh)
+
+El testigo desciende en 84 segundos, a una velocidad de equilibrio de -1.2 m/s, ejerciendo una fuerza de -1.6 kg.
+
+
+### Curvas críticas de viscosidad Marsh
+
+```
+python Simulacion.py --graficar_viscosidad input.json
+```
+
+<img src="images/Figure_2.png" alt="Ángulo crítico" width="800"/>
+
+- **Ejemplo de uso:** Con 40 L/min y una viscosidad de 36 segundos (Marsh), no se deben perforar pozos con inclinación de 44.5 grados o menos, ya que el testigo no descenderá.
 
 ---
 
@@ -216,18 +264,6 @@ El modelo, por lo tanto, soporta:
 
 ---
 
-## Esfuerzo de cizallamiento entre dos cilindros concéntricos
-
-El modelo utiliza la solución analítica para el flujo laminar viscoso entre dos cilindros:
-
-**Esfuerzo de cizallamiento en la superficie del testigo**:
-
-  $\tau = \dfrac{4 \mu V_{fluid}}{r_1 (1 - (r_1/r_2)^2)}$
-
-derivado de las ecuaciones de Navier-Stokes bajo condiciones estáticas, incomprensibles y axiales.
-
----
-
 ## Unidades utilizadas en todo el documento
 
 | Cantidad | Símbolo | Unidad |
@@ -250,39 +286,3 @@ derivado de las ecuaciones de Navier-Stokes bajo condiciones estáticas, incompr
 
 - La simulación fue diseñada específicamente para el análisis de **recuperación del testigo** durante la perforación en pozos inclinados hacia arriba.
 - La estructura del código está optimizada para la **exploración científica** y el **análisis operativo** en ingeniería de perforación.
-
-
-
-
-
----
-
-- Actualización de la velocidad \( V \) y la posición \( X \) usando el método Runge-Kutta:
-
-$V_{n+1} = V_n + \Delta t \left( \frac{dV}{dt} \right)_n$
-
-$X_{n+1} = X_n + \Delta t V_{n+1}$
-
-#### 5. Actualización de la velocidad y la posición:
-
-La velocidad se actualiza como:
-
-\[
-dv = \frac{dt}{6} \left( k_1v + 2k_2v + 2k_3v + k_4v \right)
-\]
-
-Y la posición se actualiza como:
-
-\[
-dx = \frac{dt}{6} \left( k_1x + 2k_2x + 2k_3x + k_4x \right)
-\]
-
-#### 6. Parámetros de la simulación:
-
-- **$k_1$, $k_2$, $k_3$, y $k_4$** representan las aproximaciones de la aceleración y la posición a diferentes pasos intermedios.
-
----
-
-Este es el conjunto de **ecuaciones en LaTeX** que representan el método numérico **Runge-Kutta de cuarto orden** junto con las ecuaciones de movimiento y las fuerzas involucradas en el sistema.
-
-Puedes copiar y pegar estas ecuaciones directamente en tu archivo `.tex` para generar el documento completo. Si necesitas más explicaciones o ajustes, estaré disponible para ayudarte.
