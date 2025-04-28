@@ -124,7 +124,7 @@ Additionally, it computes critical operational limits based on the drilling para
 
 The core's motion is governed by Newton's Second Law along the borehole axis:
 
-$m \ \frac{dV}{dt} = F_g + F_b + F_d + F_v$
+  $m \ \frac{dV}{dt} = F_g + F_b + F_d + F_v$
 
 where:
 
@@ -180,9 +180,9 @@ Where:
 
 The integration is based on a **second-order Runge–Kutta** method:
 
-$V_{n+1} = V_n + \Delta t \left( \frac{dV}{dt} \right)_n$
+  $V_{n+1} = V_n + \Delta t \left( \frac{dV}{dt} \right)_n$
 
-$X_{n+1} = X_n + \Delta t V_{n+1}$
+  $X_{n+1} = X_n + \Delta t V_{n+1}$
 
 Where:
 
@@ -233,7 +233,7 @@ The drilling fluid viscosity in field operations is typically measured in **Mars
 
 The approximate conversion between Marsh seconds and dynamic viscosity (Pa·s) used in this project is:
 
-$\mu = \dfrac{1.1 \times (\text{Marsh Seconds} - 25)}{1000}$
+  $\mu = \dfrac{1.1 \times (\text{Marsh Seconds} - 25)}{1000}$
 
 Where:
 
@@ -294,7 +294,7 @@ The model uses the analytical solution for laminar viscous flow between two cyli
 
 **Shear stress at core surface**:
 
-$\tau = \dfrac{4 \mu V_{fluid}}{r_1 (1 - (r_1/r_2)^2)}$
+  $\tau = \dfrac{4 \mu V_{fluid}}{r_1 (1 - (r_1/r_2)^2)}$
 
 derived from the Navier-Stokes equations under steady, incompressible, axisymmetric conditions.
 
